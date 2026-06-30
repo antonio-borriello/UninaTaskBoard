@@ -13,7 +13,8 @@ public class Progetto {
     private String tipoProgetto;
     private Utente creatore;
 
-
+// Aggiungere in seguito costruttore con id da assegnare per db
+    
     public Progetto(String titolo, Date dataCreazione, String estensione, String nomeFile, String percorso, String tipoDocumentazione, String tipoProgetto, Utente creatore) {
         this.titolo = titolo;
         this.dataCreazione = dataCreazione;

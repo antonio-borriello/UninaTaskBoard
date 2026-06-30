@@ -1,7 +1,7 @@
 package entity;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+
 
 public class Assegnazione {
     private Utente utente;
@@ -14,11 +14,20 @@ public class Assegnazione {
         this.dataCreazione = dataCreazione;
     }
 
-    public int calcolaTempoTrascorsoDaAssegnazione() {
-        if (dataCreazione == null) return 0;
-        long diffInMillies = Math.abs(new Date().getTime() - dataCreazione.getTime());
-        long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        return (int) diffInDays;
+    public int calcolaGiorniTrascorsi() { //metodo più semplice per il calcolo dei giorni trascorsi 
+        if (dataCreazione == null) {
+            return 0;
+        }
+        
+        long tempoOggi = new Date().getTime();
+        long tempoAssegnazione = dataCreazione.getTime();
+        
+        long differenza = tempoOggi - tempoAssegnazione;
+        
+        // Calcolo i giorni dividendo per i millisecondi in un giorno (1000 * 60 * 60 * 24)
+        int giorni = (int) (differenza / 86400000);
+        
+        return Math.abs(giorni);
     }
 
     public Utente getUtente() { return utente; }
