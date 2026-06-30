@@ -1,0 +1,6 @@
+
+# Ignora i file di configurazione e per evitare prossimi errori di compilazione
+bin/
+.project
+.classpath
+.settings/
