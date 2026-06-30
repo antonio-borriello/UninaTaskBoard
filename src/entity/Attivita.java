@@ -13,6 +13,7 @@ public class Attivita {
     private String infoSpecifiche;
     private Progetto progetto;
 
+    //come in progetto aggiungere in futuro costruttore con id per voerload
 
     public Attivita(String titolo, String descrizione, Date dataCreazione, Date dataScadenza, String statoAvanzamento, String tipoAttivita, String infoSpecifiche, Progetto progetto) {
         this.titolo = titolo;
@@ -27,7 +28,7 @@ public class Attivita {
 
     public boolean isScaduta() {
         if (dataScadenza == null) return false;
-        return new Date().after(dataScadenza);
+        return new Date().after(dataScadenza); //data din oggi viene dopo dataScadenza? se si return true
     }
 
     public void avanzaStato() {
