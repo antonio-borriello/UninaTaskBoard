@@ -17,7 +17,7 @@ public class ReportController {
             if (a == null || a.getStatoAvanzamento() == null) continue;
 
             String stato = a.getStatoAvanzamento();
-            if ("Da fare".equalsIgnoreCase(stato)) {
+            if ("Da fare".equalsIgnoreCase(stato)) { //Metodo che confornta dur String e ignora se è maiusc o min
                 stats[0]++;
             } else if ("In corso".equalsIgnoreCase(stato)) {
                 stats[1]++;
