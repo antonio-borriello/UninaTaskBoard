@@ -3,7 +3,6 @@ package dao;
 import entity.Attivita;
 import entity.Progetto;
 import entity.Utente;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ public class AttivitaDAO {
 
     public boolean save(Attivita attivita) {
         String query = "INSERT INTO Attivita (titolo, descrizione, dataCreazione, dataScadenza, statoAvanzamento, tipoAttivita, infoSpecifiche, progetto_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             
             stmt.setString(1, attivita.getTitolo());
@@ -40,25 +39,25 @@ public class AttivitaDAO {
         List<Attivita> attivitaList = new ArrayList<>();
         String query = "SELECT * FROM Attivita WHERE progetto_id = ?";
         
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             
             stmt.setInt(1, progetto.getId());
             
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    Attivita a = new Attivita(
-                        rs.getInt("id_attivita"),
-                        rs.getString("titolo"),
-                        rs.getString("descrizione"),
-                        rs.getDate("dataCreazione"),
-                        rs.getDate("dataScadenza"),
-                        rs.getString("statoAvanzamento"),
-                        rs.getString("tipoAttivita"),
-                        rs.getString("infoSpecifiche"),
-                        progetto
-                    );
-                    attivitaList.add(a);
+                	  Attivita a = new Attivita(
+                              rs.getInt("id_attivita"),
+                              rs.getString("titolo"),
+                              rs.getString("descrizione"),
+                              rs.getDate("dataCreazione"),
+                              rs.getDate("dataScadenza"),
+                              rs.getString("statoAvanzamento"),
+                              rs.getString("tipoAttivita"),
+                              rs.getString("infoSpecifiche"),
+                              progetto
+                          );
+                          attivitaList.add(a);
                 }
             }
         } catch (SQLException e) {
@@ -69,7 +68,7 @@ public class AttivitaDAO {
 
     public boolean delete(Attivita attivita) {
         String query = "DELETE FROM Attivita WHERE id_attivita = ?";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, attivita.getId());
             return stmt.executeUpdate() > 0;
@@ -81,7 +80,7 @@ public class AttivitaDAO {
 
     public boolean assegnaUtente(Utente utente, Attivita attivita) {
         String query = "INSERT INTO Assegnazione (utente_nickname, attivita_id, dataCreazione) VALUES (?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             
             stmt.setString(1, utente.getNickname());
@@ -98,7 +97,7 @@ public class AttivitaDAO {
     public List<String> getUtentiAssegnati(Attivita attivita) {
         List<String> utenti = new ArrayList<>();
         String query = "SELECT utente_nickname FROM Assegnazione WHERE attivita_id = ?";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, attivita.getId());
             try (ResultSet rs = stmt.executeQuery()) {
@@ -114,7 +113,7 @@ public class AttivitaDAO {
 
     public boolean updateStato(Attivita attivita) {
         String query = "UPDATE Attivita SET statoAvanzamento = ? WHERE id_attivita = ?";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, attivita.getStatoAvanzamento());
             stmt.setInt(2, attivita.getId());
