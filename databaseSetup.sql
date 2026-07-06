@@ -19,6 +19,7 @@ CREATE TABLE Progetto (
     id_progetto SERIAL PRIMARY KEY, --Serial incrementa l'id automaticamente, l'ho visto su bytebase.com
     titolo VARCHAR(200) NOT NULL,
     dataCreazione DATE NOT NULL,
+    tipoProgetto VARCHAR(50) NOT NULL,
     estensione VARCHAR(50),
     nomeFile VARCHAR(255),
     percorso VARCHAR(500),
@@ -48,7 +49,6 @@ CREATE TABLE Attivita (
     dataCreazione DATE NOT NULL,
     dataScadenza DATE,
     statoAvanzamento VARCHAR(50) NOT NULL, -- es: "Da fare", "In corso", "Completata"
-    tipoAttivita VARCHAR(50) NOT NULL, -- es: "Documentazione", "Sviluppo"
     infoSpecifiche TEXT, 
     progetto_id INT NOT NULL,
     CONSTRAINT fk_attivita_progetto FOREIGN KEY (progetto_id) REFERENCES Progetto(id_progetto) ON DELETE CASCADE

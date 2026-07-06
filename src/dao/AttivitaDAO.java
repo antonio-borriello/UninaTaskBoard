@@ -10,7 +10,7 @@ import java.util.List;
 public class AttivitaDAO {
 
     public boolean save(Attivita attivita) {
-        String query = "INSERT INTO Attivita (titolo, descrizione, dataCreazione, dataScadenza, statoAvanzamento, tipoAttivita, infoSpecifiche, progetto_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Attivita (titolo, descrizione, dataCreazione, dataScadenza, statoAvanzamento, infoSpecifiche, progetto_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             
@@ -23,7 +23,6 @@ public class AttivitaDAO {
                 stmt.setNull(4, Types.DATE);
             }
             stmt.setString(5, attivita.getStatoAvanzamento());
-            stmt.setString(6, attivita.getTipoAttivita());
             stmt.setString(7, attivita.getInfoSpecifiche());
             stmt.setInt(8, attivita.getProgetto().getId());
             
@@ -53,7 +52,6 @@ public class AttivitaDAO {
                               rs.getDate("dataCreazione"),
                               rs.getDate("dataScadenza"),
                               rs.getString("statoAvanzamento"),
-                              rs.getString("tipoAttivita"),
                               rs.getString("infoSpecifiche"),
                               progetto
                           );
