@@ -36,7 +36,7 @@ public class ReportController {
 
         for (Attivita a : attivita) {
             // Controllo null aggiunto per evitare errori se tipoAttivita è nullo
-            if (a != null && a.getTipoAttivita() != null && "Sviluppo".equalsIgnoreCase(a.getTipoAttivita())) {
+        	if ("AttivitàSviluppo".equalsIgnoreCase(a.getProgetto().getTipoProgetto())) {
                 count++;
             }
         }
