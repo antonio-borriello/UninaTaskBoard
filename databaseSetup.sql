@@ -25,8 +25,13 @@ CREATE TABLE Progetto (
     percorso VARCHAR(500),
     tipoDocumentazione VARCHAR(100),
     creatore_nickname VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_progetto_creatore FOREIGN KEY (creatore_nickname) REFERENCES Utente(nickname) ON DELETE CASCADE
-); --Vincolo che impone le foreign key e acosa si riferisce e nel caso viene eliminata elimina tutto a cascata
+       CONSTRAINT fk_progetto_creatore FOREIGN KEY (creatore_nickname) REFERENCES Utente(nickname) ON DELETE CASCADE,--Vincolo che impone le foreign key e acosa si riferisce e nel caso viene eliminata elimina tutto a cascata
+    CONSTRAINT chk_coerenza_tipo_progetto CHECK (
+        (tipoProgetto = 'Documentazione' AND tipoDocumentazione IS NOT NULL) 
+        OR 
+        (tipoProgetto = 'AttivitàSviluppo' AND estensione IS NOT NULL AND nomeFile IS NOT NULL AND percorso IS NOT NULL)
+    ) --Check per la coerenza del tipo progetto
+); 
 
 
 
@@ -38,7 +43,8 @@ CREATE TABLE Partecipazione (
     dataScadenza DATE NOT NULL,
     PRIMARY KEY (utente_nickname, progetto_id),
     CONSTRAINT fk_partecipazione_utente FOREIGN KEY (utente_nickname) REFERENCES Utente(nickname) ON DELETE CASCADE,
-    CONSTRAINT fk_partecipazione_progetto FOREIGN KEY (progetto_id) REFERENCES Progetto(id_progetto) ON DELETE CASCADE
+    CONSTRAINT fk_partecipazione_progetto FOREIGN KEY (progetto_id) REFERENCES Progetto(id_progetto) ON DELETE CASCADE,
+    CONSTRAINT chk_scadenza_invito CHECK (dataScadenza >= dataInvito) --Cambiato da controllo nel trigger a vincolo effettivo
 );
 
 
@@ -93,11 +99,6 @@ BEGIN
     -- La scadenza dell'attività non può essere precedente a quella del progetto
     IF v_data_scadenza IS NOT NULL AND v_data_scadenza < v_data_creazione_prog THEN
         RAISE EXCEPTION 'La data di scadenza dell''attività non può essere precedente alla creazione del progetto.';
-    END IF;
-
-    --La scadenza non può essere precedente alla creazione dell'attività
-    IF v_data_scadenza IS NOT NULL AND v_data_scadenza < v_data_creazione THEN
-        RAISE EXCEPTION 'La data di scadenza non può essere precedente alla data di creazione dell''attività.';
     END IF;
 
     RETURN NEW;
