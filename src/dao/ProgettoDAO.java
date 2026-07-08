@@ -121,7 +121,20 @@ public class ProgettoDAO {
     
     
 
-  //Aggiungere metodo che prende la futura procedura in sql
+  //Aggiunto nuovo metodo 
+    public boolean pulisciInvitiScaduti(Utente utente) {
+        String query = "CALL rimuovi_miei_inviti_scaduti(?)";
+        try (Connection conn = DBConnection.getConnection();
+             java.sql.CallableStatement stmt = conn.prepareCall(query)) {
+             
+            stmt.setString(1, utente.getNickname());
+            stmt.execute(); // Invoca la procedura nel DB
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     
     
     
