@@ -101,4 +101,4 @@ public class SchermataRegistrazione extends JFrame {
         } else {
             GestoreNotifiche.mostraErrore(this, "Nickname già in uso o errore di connessione.");
         }
-    }
+    }}

@@ -36,11 +36,10 @@ public class AttivitaController {
         return attivitaDAO.findByProgetto(progetto);
     }
 
-    public List<Attivita> filtraAttivita(List<Attivita> tutte, String stato, String tipo, String membro, String scadenza) {
+    public List<Attivita> filtraAttivita(List<Attivita> tutte, String stato, String membro, String scadenza) {
         List<Attivita> filtrate = new ArrayList<>();
         for (Attivita a : tutte) {
             boolean okStato = stato.equals("Tutti") || a.getStatoAvanzamento().equalsIgnoreCase(stato);
-            boolean okTipo = tipo.equals("Tutti") || a.getTipoAttivita().equalsIgnoreCase(tipo);
             
             boolean okMembro = true;
             if (membro != null && !membro.trim().isEmpty()) {
@@ -65,14 +64,14 @@ public class AttivitaController {
                 }
             }
             
-            if (okStato && okTipo && okMembro && okScadenza) {
+            if (okStato && okMembro && okScadenza) {
                 filtrate.add(a);
             }
         }
         return filtrate;
     }
 
-    public boolean aggiungiAttivitaCompleta(String titolo, String descrizione, String tipo, String infoSpecifiche, Date dataScadenza, Progetto progetto) {
+    public boolean aggiungiAttivitaCompleta(String titolo, String descrizione, String infoSpecifiche, Date dataScadenza, Progetto progetto) {
         Date dataCreazione = new Date();
         
         // Vincolo: Cronologia Progetto-Attività
@@ -86,7 +85,7 @@ public class AttivitaController {
             return false; // Scadenza non valida
         }
 
-        Attivita nuovaAttivita = new Attivita(titolo, descrizione, dataCreazione, dataScadenza, "Da fare", tipo, infoSpecifiche, progetto);
+        Attivita nuovaAttivita = new Attivita(titolo, descrizione, dataCreazione, dataScadenza, "Da fare", infoSpecifiche, progetto);
         return attivitaDAO.save(nuovaAttivita);
     }
 
