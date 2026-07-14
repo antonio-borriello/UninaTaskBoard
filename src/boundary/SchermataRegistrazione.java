@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 public class SchermataRegistrazione extends JFrame {
 
     private LoginController loginController;
@@ -101,4 +102,3 @@ public class SchermataRegistrazione extends JFrame {
             GestoreNotifiche.mostraErrore(this, "Nickname già in uso o errore di connessione.");
         }
     }
-}

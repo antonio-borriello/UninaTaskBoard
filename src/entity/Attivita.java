@@ -9,19 +9,29 @@ public class Attivita {
     private Date dataCreazione;
     private Date dataScadenza;
     private String statoAvanzamento;
-    private String tipoAttivita; 
     private String infoSpecifiche;
     private Progetto progetto;
 
-    //come in progetto aggiungere in futuro costruttore con id per voerload
-
-    public Attivita(String titolo, String descrizione, Date dataCreazione, Date dataScadenza, String statoAvanzamento, String tipoAttivita, String infoSpecifiche, Progetto progetto) {
+//aggiunta del costruttore con l'id che ci eravamo dimenticati altrimenti failava la query nel dao 
+    public Attivita(int id, String titolo, String descrizione, Date dataCreazione, Date dataScadenza, String statoAvanzamento, 
+    		String infoSpecifiche, Progetto progetto) {
+        this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.dataCreazione = dataCreazione;
         this.dataScadenza = dataScadenza;
         this.statoAvanzamento = statoAvanzamento;
-        this.tipoAttivita = tipoAttivita;
+        this.infoSpecifiche = infoSpecifiche;
+        this.progetto = progetto;
+    } 
+
+    public Attivita(String titolo, String descrizione, Date dataCreazione, Date dataScadenza, String statoAvanzamento,
+    		String infoSpecifiche, Progetto progetto) {
+        this.titolo = titolo;
+        this.descrizione = descrizione;
+        this.dataCreazione = dataCreazione;
+        this.dataScadenza = dataScadenza;
+        this.statoAvanzamento = statoAvanzamento;
         this.infoSpecifiche = infoSpecifiche;
         this.progetto = progetto;
     }
@@ -51,8 +61,6 @@ public class Attivita {
     public void setDataScadenza(Date dataScadenza) { this.dataScadenza = dataScadenza; }
     public String getStatoAvanzamento() { return statoAvanzamento; }
     public void setStatoAvanzamento(String statoAvanzamento) { this.statoAvanzamento = statoAvanzamento; }
-    public String getTipoAttivita() { return tipoAttivita; }
-    public void setTipoAttivita(String tipoAttivita) { this.tipoAttivita = tipoAttivita; }
     public String getInfoSpecifiche() { return infoSpecifiche; }
     public void setInfoSpecifiche(String infoSpecifiche) { this.infoSpecifiche = infoSpecifiche; }
     public Progetto getProgetto() { return progetto; }

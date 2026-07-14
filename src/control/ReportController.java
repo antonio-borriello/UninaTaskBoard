@@ -1,21 +1,32 @@
 package control;
 
+import dao.AttivitaDAO;
+import dao.ProgettoDAO;
 import entity.Attivita;
+import entity.Progetto;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportController {
 
+    private AttivitaDAO attivitaDAO;
+    private ProgettoDAO progettoDAO;
+
+    public ReportController() {
+        this.attivitaDAO = new AttivitaDAO();
+        this.progettoDAO = new ProgettoDAO();
+    }
+
+    public List<Attivita> getAttivitaProgetto(Progetto progetto) {
+        return attivitaDAO.findByProgetto(progetto);
+    }
+
     // Indici: 0 = Da fare, 1 = In corso, 2 = Completata
     public int[] getStatisticheStato(List<Attivita> attivita) {
         int[] stats = new int[3];
-        
-        // Controllo di sicurezza: se la lista è nulla, restituisce l'array inizializzato a zero
-        if (attivita == null) return stats;
 
         for (Attivita a : attivita) {
-            // Controllo per evitare NullPointerException su oggetti o stati nulli
-            if (a == null || a.getStatoAvanzamento() == null) continue;
-
             String stato = a.getStatoAvanzamento();
             if ("Da fare".equalsIgnoreCase(stato)) {
                 stats[0]++;
@@ -30,14 +41,38 @@ public class ReportController {
 
     public int getNumeroAttivitaSviluppo(List<Attivita> attivita) {
         int count = 0;
-        
-        // Controllo di sicurezza per la lista
-        if (attivita == null) return 0;
-
         for (Attivita a : attivita) {
-            // Controllo null aggiunto per evitare errori se tipoAttivita è nullo
-            if (a != null && a.getTipoAttivita() != null && "Sviluppo".equalsIgnoreCase(a.getTipoAttivita())) {
+            if ("AttivitàSviluppo".equalsIgnoreCase(a.getProgetto().getTipoProgetto())) {
                 count++;
+            }
+        }
+        return count;
+    }
+
+    public List<String> getMembriConAttivitaCompletate(List<Attivita> attivita) {
+        List<String> membri = new ArrayList<>();
+        
+        for (Attivita a : attivita) {
+            if ("Completata".equals(a.getStatoAvanzamento())) {
+                List<String> assegnati = attivitaDAO.getUtentiAssegnati(a);
+                for (String utente : assegnati) {
+                    if (!membri.contains(utente)) {
+                        membri.add(utente);
+                    }
+                }
+            }
+        }
+        return membri;
+    }
+    
+    public int getAttivitaCompletateDaMembro(List<Attivita> attivita, String membro) {
+        int count = 0;
+        for (Attivita a : attivita) {
+            if ("Completata".equals(a.getStatoAvanzamento())) {
+                List<String> assegnati = attivitaDAO.getUtentiAssegnati(a);
+                if (assegnati.contains(membro)) {
+                    count++;
+                }
             }
         }
         return count;
