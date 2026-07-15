@@ -21,7 +21,7 @@ public class LoginController {
         return false;
     }
 
-   /* public void avvia() {
+public void avvia() {
         boundary.SchermataLogin login = new boundary.SchermataLogin(this);
         login.setVisible(true);
     }
@@ -29,8 +29,7 @@ public class LoginController {
     public void apriRegistrazione() {
         boundary.SchermataRegistrazione registrazione = new boundary.SchermataRegistrazione(this);
         registrazione.setVisible(true);
-    }*/
-
+    }
     public boolean registraNuovoUtente(String nome, String cognome, String nickname, String email, String password) {
         // Vincolo: Validità formato Email
         if (email == null || !email.contains("@") || !email.contains(".")) {
