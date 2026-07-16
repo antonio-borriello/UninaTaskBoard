@@ -93,9 +93,10 @@ public class SchermataCreazioneAttivita extends JDialog {
         Date dataScadenza = null;
         if (!scadenzaStr.isEmpty()) {
             try {
-                dataScadenza = new SimpleDateFormat("yyyy-MM-dd").parse(scadenzaStr);
-            } catch (ParseException e) {
-                GestoreNotifiche.mostraErrore(this, "Formato data non valido (usa yyyy-MM-dd).");
+                java.time.LocalDate localDate = java.time.LocalDate.parse(scadenzaStr);
+                dataScadenza = java.sql.Date.valueOf(localDate);
+            } catch (java.time.format.DateTimeParseException e) {
+                GestoreNotifiche.mostraErrore(this, "Formato data non valido (usa yyyy-MM-dd con date reali).");
                 return;
             }
         }

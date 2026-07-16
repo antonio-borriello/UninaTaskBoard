@@ -121,7 +121,7 @@ public class ProgettoDAO {
     
     
 
-  //Aggiunto nuovo metodo 
+
     public boolean pulisciInvitiScaduti(Utente utente) {
         String query = "CALL rimuovi_miei_inviti_scaduti(?)";
         try (Connection conn = DbConnection.getConnection();

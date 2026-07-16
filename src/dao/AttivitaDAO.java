@@ -23,8 +23,8 @@ public class AttivitaDAO {
                 stmt.setNull(4, Types.DATE);
             }
             stmt.setString(5, attivita.getStatoAvanzamento());
-            stmt.setString(7, attivita.getInfoSpecifiche());
-            stmt.setInt(8, attivita.getProgetto().getId());
+            stmt.setString(6, attivita.getInfoSpecifiche());
+            stmt.setInt(7, attivita.getProgetto().getId());
             
             int rows = stmt.executeUpdate();
             return rows > 0;

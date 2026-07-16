@@ -108,7 +108,7 @@ public class SchermataInviti extends JFrame {
                 GestoreNotifiche.mostraSuccesso(this, accetta ? "Invito accettato!" : "Invito rifiutato.");
                 caricaInviti();
                 // Aggiorniamo la dashboard
-                // Ricaricamento dei progetti
+                progettoController.aggiornaDashboard();
             } else {
                 GestoreNotifiche.mostraErrore(this, "Errore durante l'elaborazione.");
             }

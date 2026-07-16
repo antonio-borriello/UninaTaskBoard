@@ -52,6 +52,8 @@ public class SchermataGestioneAttivita extends JDialog {
         
         JButton bottoneAssegna = new JButton("Assegna Utente");
         JButton bottoneAvanza = new JButton("Avanza Stato");
+        JButton bottoneElimina = new JButton("Elimina Attività");
+        bottoneElimina.setForeground(Color.RED);
         JButton bottoneChiudi = new JButton("Chiudi");
 
         bottoneAssegna.addActionListener(new java.awt.event.ActionListener() {
@@ -75,8 +77,16 @@ public class SchermataGestioneAttivita extends JDialog {
             }
         });
         
+        bottoneElimina.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                eliminaAttivita();
+            }
+        });
+        
         pannelloButton.add(bottoneAssegna);
         pannelloButton.add(bottoneAvanza);
+        pannelloButton.add(bottoneElimina);
         pannelloButton.add(bottoneChiudi);
 
         getContentPane().add(pannelloButton, BorderLayout.SOUTH);
@@ -113,6 +123,20 @@ public class SchermataGestioneAttivita extends JDialog {
                 attivitaController.mostraPannelloAttivita(progetto);
             } else {
                 GestoreNotifiche.mostraErrore(this, "Errore nell'aggiornamento.");
+            }
+        }
+    }
+
+    private void eliminaAttivita() {
+        int confirm = JOptionPane.showConfirmDialog(this, "Sei sicuro di voler eliminare questa attività?", "Conferma Eliminazione", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            boolean success = attivitaController.eliminaAttivita(attivitaEsistente);
+            if (success) {
+                GestoreNotifiche.mostraSuccesso(this, "Attività eliminata con successo.");
+                this.dispose();
+                attivitaController.mostraPannelloAttivita(progetto);
+            } else {
+                GestoreNotifiche.mostraErrore(this, "Impossibile eliminare l'attività. Le attività completate non possono essere eliminate dal database.");
             }
         }
     }

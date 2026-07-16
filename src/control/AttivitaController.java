@@ -125,4 +125,8 @@ public class AttivitaController {
         attivita.setStatoAvanzamento(nuovoStato);
         return attivitaDAO.updateStato(attivita);
     }
+
+    public boolean eliminaAttivita(Attivita attivita) {
+        return attivitaDAO.delete(attivita);
+    }
 }
