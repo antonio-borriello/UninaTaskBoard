@@ -28,11 +28,10 @@ public class SchermataGestioneAttivita extends JDialog {
         setModal(true);
         getContentPane().setLayout(new BorderLayout());
 
-        JPanel pannelloInfo = new JPanel(new GridLayout(4, 1));
+        JPanel pannelloInfo = new JPanel(new GridLayout(3, 1));
         pannelloInfo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pannelloInfo.add(new JLabel("Titolo: " + attivitaEsistente.getTitolo()));
         pannelloInfo.add(new JLabel("Stato attuale: " + attivitaEsistente.getStatoAvanzamento()));
-        pannelloInfo.add(new JLabel("Tipo: " + attivitaEsistente.getTipoAttivita()));
         pannelloInfo.add(new JLabel("Info: " + (attivitaEsistente.getInfoSpecifiche() != null ? attivitaEsistente.getInfoSpecifiche() : "N/D")));
 
         getContentPane().add(pannelloInfo, BorderLayout.NORTH);
