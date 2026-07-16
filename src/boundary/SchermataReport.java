@@ -107,3 +107,4 @@ public class SchermataReport extends JFrame {
         add(pannelloButton, BorderLayout.SOUTH);
     }
 }
+
