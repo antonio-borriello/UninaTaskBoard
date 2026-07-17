@@ -55,7 +55,7 @@ public class ProgettoController {
     }
 
     public String invitaUtente(String nicknameInvitato, Progetto progetto) {
-        // Needs a date. I'll default to 7 days from now.
+
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.add(java.util.Calendar.DAY_OF_MONTH, 7);
         java.util.Date dataScadenza = cal.getTime();
@@ -70,7 +70,7 @@ public class ProgettoController {
     }
 
     public boolean validaPercorsoFile(String formato) {
-        // Simple mock validation logic for file paths
+
         if (formato == null || formato.trim().isEmpty()) {
             return false;
         }
