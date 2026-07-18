@@ -1,13 +1,18 @@
 package dao;
 
-import entity.Attivita;
-import entity.Progetto;
-import entity.Utente;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttivitaDAO {
+import entity.Attivita;
+import entity.Progetto;
+import entity.Utente;
+
+public class AttivitaDAO implements IAttivitaDAO{
 
     public boolean save(Attivita attivita) {
         String query = "INSERT INTO Attivita (titolo, descrizione, dataCreazione, dataScadenza, statoAvanzamento, infoSpecifiche, progetto_id) VALUES (?, ?, ?, ?, ?, ?, ?)";

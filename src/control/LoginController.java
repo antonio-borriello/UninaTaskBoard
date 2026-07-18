@@ -1,11 +1,12 @@
 package control;
 
+import dao.IUtenteDAO;
 import dao.UtenteDAO;
 import entity.Utente;
 
 public class LoginController {
-
-    private UtenteDAO utenteDAO;
+	
+    private IUtenteDAO utenteDAO;
     private Utente utenteLoggato;
 
     public LoginController() {

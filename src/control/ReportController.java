@@ -1,17 +1,19 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dao.AttivitaDAO;
+import dao.IAttivitaDAO;
+import dao.IProgettoDAO;
 import dao.ProgettoDAO;
 import entity.Attivita;
 import entity.Progetto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ReportController {
 
-    private AttivitaDAO attivitaDAO;
-    private ProgettoDAO progettoDAO;
+    private IAttivitaDAO attivitaDAO;
+    private IProgettoDAO progettoDAO;
 
     public ReportController() {
         this.attivitaDAO = new AttivitaDAO();
