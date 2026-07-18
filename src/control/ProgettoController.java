@@ -1,15 +1,16 @@
 package control;
 
+import java.util.Date;
+import java.util.List;
+
+import dao.IProgettoDAO;
 import dao.ProgettoDAO;
 import entity.Progetto;
 import entity.Utente;
 
-import java.util.Date;
-import java.util.List;
-
 public class ProgettoController {
 
-    private ProgettoDAO progettoDAO;
+    private IProgettoDAO progettoDAO;
     private Utente utenteLoggato;
     private boundary.SchermataDashboard dashboard;
 
@@ -60,7 +61,7 @@ public class ProgettoController {
         cal.add(java.util.Calendar.DAY_OF_MONTH, 7);
         java.util.Date dataScadenza = cal.getTime();
         
-        dao.UtenteDAO uDao = new dao.UtenteDAO();
+        dao.IUtenteDAO uDao = new dao.UtenteDAO();
         Utente u = uDao.findByNickname(nicknameInvitato);
         if (u == null) {
             return "Utente non trovato.";

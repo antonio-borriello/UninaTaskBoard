@@ -1,8 +1,7 @@
 package main;
 
-import boundary.SchermataLogin;
-
-import javax.swing.*;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,13 +1,13 @@
 package dao;
 
-import entity.Utente;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement; //Che vanno a piazzare al posto dei ? il parametro passatop
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UtenteDAO {
+import entity.Utente;
+
+public class UtenteDAO implements IUtenteDAO {
 	//Primo metodo per cercare un utente da nome e password che ci servirà per scrivere poi il logincontroller
     public Utente findByNicknameAndPassword(String nickname, String password) {
         String query = "SELECT * FROM Utente WHERE nickname = ? AND password = ?";

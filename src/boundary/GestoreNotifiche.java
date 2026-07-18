@@ -1,7 +1,8 @@
 package boundary;
 
-import javax.swing.*;
 import java.awt.Component;
+
+import javax.swing.JOptionPane;
 
 public class GestoreNotifiche {
 

@@ -1,20 +1,22 @@
 package control;
 
-import dao.AttivitaDAO;
-import dao.ProgettoDAO;
-import dao.UtenteDAO;
-import entity.Attivita;
-import entity.Partecipazione;
-import entity.Progetto;
-import entity.Utente;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dao.AttivitaDAO;
+import dao.IAttivitaDAO;
+import dao.IProgettoDAO;
+import dao.IUtenteDAO;
+import dao.ProgettoDAO;
+import dao.UtenteDAO;
+import entity.Attivita;
+import entity.Progetto;
+import entity.Utente;
+
 public class AttivitaController {
 
-    private AttivitaDAO attivitaDAO;
+    private IAttivitaDAO attivitaDAO;
     private boundary.SchermataDettaglioProgetto parentView;
 
     public AttivitaController(boundary.SchermataDettaglioProgetto parentView) {
@@ -93,7 +95,7 @@ public class AttivitaController {
         List<String> membri = new ArrayList<>();
         membri.add(progetto.getCreatore().getNickname()); // Creatore is a member
         
-        ProgettoDAO pDao = new ProgettoDAO();
+        IProgettoDAO pDao = new ProgettoDAO();
         // Recupero i partecipanti dal DAO
         
         
@@ -114,7 +116,8 @@ public class AttivitaController {
             return false; // L'utente non fa parte del progetto o non ha accettato l'invito
         }
 
-        Utente u = new UtenteDAO().findByNickname(nickname);
+        IUtenteDAO uDao = new UtenteDAO();
+        Utente u = uDao.findByNickname(nickname);
         if (u != null) {
             return attivitaDAO.assegnaUtente(u, attivita);
         }
