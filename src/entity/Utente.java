@@ -15,11 +15,6 @@ public class Utente {
         this.password = password;
     }
 
-    public void modificaProfilo(String nome, String cognome) {
-        this.nome = nome;
-        this.cognome = cognome;
-    }
-
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) { this.nickname = nickname; }
     public String getNome() { return nome; }

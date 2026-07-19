@@ -31,12 +31,6 @@ public class ProgettoController {
         return utenteLoggato;
     }
 
-    public void aggiornaDashboard() {
-        if (dashboard != null) {
-            dashboard.caricaProgetti();
-        }
-    }
-
     public boolean creaNuovoProgetto(String titolo, String tipoProgetto, String tipoDoc, String estensione, String nomeFile, String percorso, Utente creatore) {
         Progetto p = new Progetto(titolo, new Date(), estensione, nomeFile, percorso, tipoDoc, tipoProgetto, creatore);
         Progetto salvato = progettoDAO.save(p);
@@ -56,7 +50,7 @@ public class ProgettoController {
     }
 
     public String invitaUtente(String nicknameInvitato, Progetto progetto) {
-
+        // Needs a date. I'll default to 7 days from now.
         java.util.Calendar cal = java.util.Calendar.getInstance();
         cal.add(java.util.Calendar.DAY_OF_MONTH, 7);
         java.util.Date dataScadenza = cal.getTime();
@@ -71,7 +65,7 @@ public class ProgettoController {
     }
 
     public boolean validaPercorsoFile(String formato) {
-
+        // Simple mock validation logic for file paths
         if (formato == null || formato.trim().isEmpty()) {
             return false;
         }
