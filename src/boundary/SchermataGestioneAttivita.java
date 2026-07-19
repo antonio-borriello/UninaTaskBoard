@@ -1,9 +1,7 @@
 package boundary;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
-
 import java.awt.GridLayout;
 import java.util.List;
 
@@ -139,6 +137,7 @@ public class SchermataGestioneAttivita extends JDialog {
             }
         }
     }
+
     
     private void elimina() {
         int confirm = JOptionPane.showConfirmDialog(this, 
@@ -157,3 +156,5 @@ public class SchermataGestioneAttivita extends JDialog {
         }
     }
 }
+
+
