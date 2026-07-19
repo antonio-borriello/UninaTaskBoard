@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 
 import control.LoginController;
 
-
 public class SchermataRegistrazione extends JFrame {
 
     private LoginController loginController;
@@ -99,13 +98,13 @@ public class SchermataRegistrazione extends JFrame {
             return;
         }
 
-        boolean successo = loginController.registraNuovoUtente(nome, cognome, nickname, email, password);
-
-        if (successo) {
+        try {
+            loginController.registraNuovoUtente(nome, cognome, nickname, email, password);
             GestoreNotifiche.mostraSuccesso(this, "Registrazione completata con successo!");
             this.dispose();
             loginController.avvia();
-        } else {
-            GestoreNotifiche.mostraErrore(this, "Nickname già in uso o errore di connessione.");
+        } catch (exception.ValidationException ex) {
+            GestoreNotifiche.mostraErrore(this, ex.getMessage());
         }
-    }}
+    }
+}

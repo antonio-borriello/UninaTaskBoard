@@ -45,39 +45,61 @@ public class SchermataLogin extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        // Nickname Label
+        JLabel lblNickname = new JLabel("Nickname:");
+        GridBagConstraints gbc_lblNickname = new GridBagConstraints();
+        gbc_lblNickname.insets = new Insets(10, 10, 10, 10);
+        gbc_lblNickname.fill = GridBagConstraints.HORIZONTAL;
+        gbc_lblNickname.gridx = 0;
+        gbc_lblNickname.gridy = 0;
+        panel.add(lblNickname, gbc_lblNickname);
 
-        // Nickname
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(new JLabel("Nickname:"), gbc);
-
-        gbc.gridx = 1;
+        // Nickname TextField
         campoNickname = new JTextField(15);
-        panel.add(campoNickname, gbc);
+        GridBagConstraints gbc_campoNickname = new GridBagConstraints();
+        gbc_campoNickname.insets = new Insets(10, 10, 10, 10);
+        gbc_campoNickname.fill = GridBagConstraints.HORIZONTAL;
+        gbc_campoNickname.gridx = 1;
+        gbc_campoNickname.gridy = 0;
+        panel.add(campoNickname, gbc_campoNickname);
 
-        // Password
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(new JLabel("Password:"), gbc);
+        // Password Label
+        JLabel lblPassword = new JLabel("Password:");
+        GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+        gbc_lblPassword.insets = new Insets(10, 10, 10, 10);
+        gbc_lblPassword.fill = GridBagConstraints.HORIZONTAL;
+        gbc_lblPassword.gridx = 0;
+        gbc_lblPassword.gridy = 1;
+        panel.add(lblPassword, gbc_lblPassword);
 
-        gbc.gridx = 1;
+        // Password Field
         campoPassword = new JPasswordField(15);
-        panel.add(campoPassword, gbc);
+        GridBagConstraints gbc_campoPassword = new GridBagConstraints();
+        gbc_campoPassword.insets = new Insets(10, 10, 10, 10);
+        gbc_campoPassword.fill = GridBagConstraints.HORIZONTAL;
+        gbc_campoPassword.gridx = 1;
+        gbc_campoPassword.gridy = 1;
+        panel.add(campoPassword, gbc_campoPassword);
 
-        // Pulsante Login
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
+        // Bottone Login
         bottoneLogin = new JButton("Login");
-        panel.add(bottoneLogin, gbc);
+        GridBagConstraints gbc_bottoneLogin = new GridBagConstraints();
+        gbc_bottoneLogin.insets = new Insets(10, 10, 10, 10);
+        gbc_bottoneLogin.fill = GridBagConstraints.HORIZONTAL;
+        gbc_bottoneLogin.gridwidth = 2;
+        gbc_bottoneLogin.gridx = 0;
+        gbc_bottoneLogin.gridy = 2;
+        panel.add(bottoneLogin, gbc_bottoneLogin);
 
-        // Pulsante Registrati
-        gbc.gridy = 3;
+        // Bottone Registrati
         bottoneRegistrati = new JButton("Non hai un account? Registrati");
-        panel.add(bottoneRegistrati, gbc);
+        GridBagConstraints gbc_bottoneRegistrati = new GridBagConstraints();
+        gbc_bottoneRegistrati.insets = new Insets(10, 10, 10, 10);
+        gbc_bottoneRegistrati.fill = GridBagConstraints.HORIZONTAL;
+        gbc_bottoneRegistrati.gridwidth = 2;
+        gbc_bottoneRegistrati.gridx = 0;
+        gbc_bottoneRegistrati.gridy = 3;
+        panel.add(bottoneRegistrati, gbc_bottoneRegistrati);
 
         bottoneLogin.addActionListener(new ActionListener() {
             @Override
@@ -106,9 +128,8 @@ public class SchermataLogin extends JFrame {
             return;
         }
 
-        boolean autenticato = loginController.autentica(nickname, password);
-
-        if (autenticato) {
+        try {
+            loginController.autentica(nickname, password);
             JOptionPane.showMessageDialog(this, "Login effettuato con successo!");
             
             // Traccio la dashboard
@@ -118,8 +139,8 @@ public class SchermataLogin extends JFrame {
             dashboard.setVisible(true);
             
             this.dispose(); // Chiude la finestra di login
-        } else {
-            JOptionPane.showMessageDialog(this, "Credenziali non valide.", "Errore Login", JOptionPane.ERROR_MESSAGE);
+        } catch (exception.AuthenticationException ex) {
+            GestoreNotifiche.mostraErrore(this, ex.getMessage());
         }
     }
 }

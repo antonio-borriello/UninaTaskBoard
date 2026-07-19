@@ -5,7 +5,7 @@ import dao.UtenteDAO;
 import entity.Utente;
 
 public class LoginController {
-	
+
     private IUtenteDAO utenteDAO;
     private Utente utenteLoggato;
 
@@ -13,16 +13,16 @@ public class LoginController {
         this.utenteDAO = new UtenteDAO();
     }
 
-    public boolean autentica(String nickname, String password) {
+    public void autentica(String nickname, String password) throws exception.AuthenticationException {
         Utente u = utenteDAO.findByNicknameAndPassword(nickname, password);
         if (u != null) {
             this.utenteLoggato = u;
-            return true;
+        } else {
+            throw new exception.AuthenticationException("Nickname o password non validi!");
         }
-        return false;
     }
 
-public void avvia() {
+    public void avvia() {
         boundary.SchermataLogin login = new boundary.SchermataLogin(this);
         login.setVisible(true);
     }
@@ -31,17 +31,21 @@ public void avvia() {
         boundary.SchermataRegistrazione registrazione = new boundary.SchermataRegistrazione(this);
         registrazione.setVisible(true);
     }
-    public boolean registraNuovoUtente(String nome, String cognome, String nickname, String email, String password) {
+
+    public void registraNuovoUtente(String nome, String cognome, String nickname, String email, String password) throws exception.ValidationException {
         // Vincolo: Validità formato Email
         if (email == null || !email.contains("@") || !email.contains(".")) {
-            return false; // Email non valida
+            throw new exception.ValidationException("Il formato dell'email non è valido!");
         }
         
         if (utenteDAO.findByNickname(nickname) != null) {
-            return false; // Nickname già in uso
+            throw new exception.ValidationException("Il nickname scelto è già in uso!");
         }
         Utente u = new Utente(nickname, nome, cognome, email, password);
-        return utenteDAO.save(u);
+        boolean success = utenteDAO.save(u);
+        if (!success) {
+            throw new exception.ValidationException("Errore durante il salvataggio sul database.");
+        }
     }
 
     public Utente getUtenteLoggato() {
