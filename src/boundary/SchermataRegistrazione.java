@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import control.LoginController;
 
+
 public class SchermataRegistrazione extends JFrame {
 
     private LoginController loginController;

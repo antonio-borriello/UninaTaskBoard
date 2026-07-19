@@ -34,7 +34,7 @@ public class UtenteDAO implements IUtenteDAO {
         }
         return null;
     }
-//Questo etodo invece per la funzionalità che abbiamo visto che vogliamo implementrae per invitare
+//Questo etodo per invitare
     public Utente findByNickname(String nickname) {
         String query = "SELECT * FROM Utente WHERE nickname = ?";
         try (Connection conn = DbConnection.getConnection();

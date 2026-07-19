@@ -14,7 +14,7 @@ public class Assegnazione {
         this.dataCreazione = dataCreazione;
     }
 
-    public int calcolaGiorniTrascorsi() { //metodo più semplice per il calcolo dei giorni trascorsi 
+    public int calcolaGiorniTrascorsi() { 
         if (dataCreazione == null) {
             return 0;
         }

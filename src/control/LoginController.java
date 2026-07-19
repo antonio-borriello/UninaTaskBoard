@@ -5,7 +5,6 @@ import dao.UtenteDAO;
 import entity.Utente;
 
 public class LoginController {
-
     private IUtenteDAO utenteDAO;
     private Utente utenteLoggato;
 
