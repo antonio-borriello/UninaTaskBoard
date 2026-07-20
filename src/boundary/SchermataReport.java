@@ -44,7 +44,7 @@ public class SchermataReport extends JFrame {
 
         List<Attivita> attivita = reportController.getAttivitaProgetto(progetto);
         int[] statsStato = reportController.getStatisticheStato(attivita);
-        int numSviluppo = reportController.getNumeroAttivitaSviluppo(attivita);
+
         
         List<String> membriConCompletate = reportController.getMembriConAttivitaCompletate(attivita);
 
@@ -53,9 +53,7 @@ public class SchermataReport extends JFrame {
         pannelloInfo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pannelloInfo.add(new JLabel("Totale Attività: " + attivita.size()));
         pannelloInfo.add(new JLabel("Completate: " + statsStato[2] + " | In corso: " + statsStato[1] + " | Non iniziate (Da fare): " + statsStato[0]));
-        pannelloInfo.add(new JLabel("Attività di Sviluppo: " + numSviluppo));
         
-    
         add(pannelloInfo, BorderLayout.NORTH);
 
         // Grafici
