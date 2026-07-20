@@ -174,6 +174,7 @@ public class SchermataDashboard extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout)(pannelloDynamic.getLayout());
                 cl.show(pannelloDynamic, (String)comboTipo.getSelectedItem());
+                // Riadatta le dimensioni della finestra in base al dynamic
                 Window w = SwingUtilities.getWindowAncestor(pannelloMain);
                 if (w != null) w.pack();
             }
@@ -207,7 +208,8 @@ public class SchermataDashboard extends JFrame {
                     estensione = campoEstensione.getText();
                     nomeFile = campoNomeFile.getText();
                     percorso = campoPercorso.getText();
-
+                    
+                    //l'estensione deve essere obbligatoria
                     if (estensione.isEmpty() || nomeFile.isEmpty() || percorso.isEmpty()) {
                         GestoreNotifiche.mostraErrore(this, "Compila estensione, nome file e percorso per un progetto di sviluppo.");
                         continue;
