@@ -30,6 +30,12 @@ public class ProgettoController {
     public Utente getUtenteLoggato() {
         return utenteLoggato;
     }
+    
+    public void aggiornaDashboard() {
+        if (dashboard != null) {
+            dashboard.caricaProgetti();
+        }
+    }
 
     public boolean creaNuovoProgetto(String titolo, String tipoProgetto, String tipoDoc, String estensione, String nomeFile, String percorso, Utente creatore) {
         Progetto p = new Progetto(titolo, new Date(), estensione, nomeFile, percorso, tipoDoc, tipoProgetto, creatore);
