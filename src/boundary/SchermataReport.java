@@ -55,9 +55,7 @@ public class SchermataReport extends JFrame {
         pannelloInfo.add(new JLabel("Completate: " + statsStato[2] + " | In corso: " + statsStato[1] + " | Non iniziate (Da fare): " + statsStato[0]));
         pannelloInfo.add(new JLabel("Attività di Sviluppo: " + numSviluppo));
         
-        // Calcolo indiretto: numero medio revisioni = numero attività di sviluppo per questo progetto (singolo file)
-        pannelloInfo.add(new JLabel("Numero medio di revisioni per file: " + numSviluppo));
-        
+    
         add(pannelloInfo, BorderLayout.NORTH);
 
         // Grafici
