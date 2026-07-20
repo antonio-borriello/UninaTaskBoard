@@ -5,6 +5,8 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 public class GestoreNotifiche {
+	
+	// Parent permette di collegare la notifica alla schermata 
 
     public static void mostraErrore(Component parent, String messaggio) {
         JOptionPane.showMessageDialog(parent, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);

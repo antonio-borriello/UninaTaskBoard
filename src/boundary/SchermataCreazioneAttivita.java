@@ -38,10 +38,10 @@ public class SchermataCreazioneAttivita extends JDialog {
         setTitle("Nuova Attività");
         setSize(400, 350);
         setLocationRelativeTo(null);
-        setModal(true);
-        setLayout(new BorderLayout());
+        setModal(true); //Blocca l'interazione con il resto del sistema
+        setLayout(new BorderLayout()); // 5 zone
 
-        JPanel pannelloForm = new JPanel(new GridLayout(4, 2, 5, 5));
+        JPanel pannelloForm = new JPanel(new GridLayout(4, 2, 5, 5)); // colonna
         pannelloForm.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         pannelloForm.add(new JLabel("Titolo:"));
